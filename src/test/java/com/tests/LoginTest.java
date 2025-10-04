@@ -80,6 +80,33 @@ public class LoginTest  extends BaseTest{
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html", "User did not reach inventory page.");
     }
 
+    @Test
+    public void errorUser_verifyButtonStuckInRemoveState(){
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("error_user","secret_sauce");
+
+        InventoryPage inventoryPage = new InventoryPage(driver);
+
+        //First Click
+        inventoryPage.clickBackPackProductButton();
+
+        //Second Click
+        inventoryPage.clickBackPackProductButton();
+
+        boolean isAddToCarPresent = !driver.findElements(inventoryPage.backPackProductAddButton).isEmpty();
+
+        Assert.assertFalse(isAddToCarPresent,
+                "The button should NOT have reverted to 'Add to cart' state for the error user.");
+
+        String buttonText = driver.findElement(inventoryPage.backPackProductRemoveButton).getText();
+
+        Assert.assertEquals(buttonText, "Remove",
+                "After attempting to remove, the button text should still be 'Remove'.");
+
+
+
+    }
+
 
 
 }

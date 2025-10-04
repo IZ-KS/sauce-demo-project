@@ -7,12 +7,19 @@ import org.openqa.selenium.WebElement;
 
 public class InventoryPage {
 
-    private WebDriver driver;
-
-    private By allProductImages = By.cssSelector(".inventory_item_img img");
+    private final WebDriver driver;
 
     // Locator for the first product image (for comparison)
-    private By firstProductImage = By.xpath("(//img[@class='inventory_item_img'])[1]");
+    private final By allProductImages = By.cssSelector(".inventory_item_img img");
+    private final By firstProductImage = By.xpath("(//img[@class='inventory_item_img'])[1]");
+
+    // Locators for the button states using Arrays
+    //Just adding here for future reference
+    //private final By firstProductAddToCartButton = By.xpath("(//button[text()='Add to cart'])[1]");
+    //private final By firstProductRemoveButton = By.xpath("(//button[text()='Remove'])[1]");
+
+    public final By backPackProductAddButton = By.xpath("//button[@data-test='add-to-cart-sauce-labs-backpack']");
+    public final By backPackProductRemoveButton = By.xpath("//button[@data-test='remove-sauce-labs-backpack']");
 
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
@@ -31,4 +38,15 @@ public class InventoryPage {
     public List<WebElement> getAllProductImages() {
         return driver.findElements(allProductImages);
     }
+
+    public void clickBackPackProductButton() {
+        // Try to find the Remove button first, as that is the expected state after the first click
+        try {
+            driver.findElement(backPackProductRemoveButton).click();
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            // If Remove isn't found, click Add to Cart
+            driver.findElement(backPackProductAddButton).click();
+        }
+    }
+
 }

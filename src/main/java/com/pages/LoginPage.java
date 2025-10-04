@@ -7,10 +7,10 @@ public class LoginPage {
 
     private WebDriver driver;
 
-    private By usernameField = By.xpath("//*[@id=\"user-name\"]");
-    private By passwordField = By.xpath("//*[@id=\"password\"]");
-    private By loginButton = By.xpath("//*[@id=\"login-button\"]");
-    private By errorMsg = By.xpath("//h3[@data-test='error']");
+    private final By usernameField = By.xpath("//*[@id=\"user-name\"]");
+    private final By passwordField = By.xpath("//*[@id=\"password\"]");
+    private final By loginButton = By.xpath("//*[@id=\"login-button\"]");
+    private final By errorMsg = By.xpath("//h3[@data-test='error']");
 
     // Constructor
     public LoginPage(WebDriver driver) {
