@@ -18,8 +18,15 @@ public class InventoryPage {
     //private final By firstProductAddToCartButton = By.xpath("(//button[text()='Add to cart'])[1]");
     //private final By firstProductRemoveButton = By.xpath("(//button[text()='Remove'])[1]");
 
+    //BackPackItem
     public final By backPackProductAddButton = By.xpath("//button[@data-test='add-to-cart-sauce-labs-backpack']");
     public final By backPackProductRemoveButton = By.xpath("//button[@data-test='remove-sauce-labs-backpack']");
+
+    //SweaterItem
+    public final By sweaterProductAddButton = By.xpath("//button[@data-test='add-to-cart-test.allthethings()-t-shirt-(red)']");
+
+    //JacketItem
+    public final By jacketProductAddButton = By.xpath("//button[@data-test='add-to-cart-sauce-labs-fleece-jacket']");
 
     public InventoryPage(WebDriver driver) {
         this.driver = driver;

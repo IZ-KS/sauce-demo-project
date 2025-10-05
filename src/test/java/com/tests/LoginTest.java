@@ -3,6 +3,8 @@ package com.tests;
 import com.base.BaseTest;
 import com.pages.InventoryPage;
 import com.pages.LoginPage;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -27,6 +29,19 @@ public class LoginTest  extends BaseTest{
         Assert.assertNotEquals(img1Src, img2Src,
                 "Standard user should have unique product images");
 
+        WebElement addToCartSweaterButton = driver.findElement(inventoryPage.sweaterProductAddButton);
+        Point actualLocation = addToCartSweaterButton.getLocation();
+
+        WebElement addToCartJacketButton = driver.findElement(inventoryPage.jacketProductAddButton);
+        Point jacketButtonLocation = addToCartJacketButton.getLocation();
+
+        Assert.assertEquals(actualLocation.getX(), jacketButtonLocation.getX(),
+                "The 'Add to cart' button is align. Expected X-coordinate is align with "
+                        + jacketButtonLocation.getX() + " and found X=" + actualLocation.getX()
+        );
+        System.out.println("The 'Add to cart' button is align. Expected X-coordinate is align with "
+                        + jacketButtonLocation.getX() + " and found X=" + actualLocation.getX()
+        );
     }
 
     @Test
@@ -103,7 +118,26 @@ public class LoginTest  extends BaseTest{
         Assert.assertEquals(buttonText, "Remove",
                 "After attempting to remove, the button text should still be 'Remove'.");
 
+    }
 
+    @Test
+    public void visualUser_VerifyAddToCartButtonDisplacement(){
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("visual_user", "secret_sauce");
+
+        InventoryPage inventoryPage = new InventoryPage(driver);
+
+        WebElement addToCartSweaterButton = driver.findElement(inventoryPage.sweaterProductAddButton);
+        Point actualLocation = addToCartSweaterButton.getLocation();
+
+        WebElement addToCartJacketButton = driver.findElement(inventoryPage.jacketProductAddButton);
+        Point jacketButtonLocation = addToCartJacketButton.getLocation();
+
+        Assert.assertTrue(actualLocation.getX() > jacketButtonLocation.getX(),
+                "The 'Add to cart' button is displaced off-screen. Expected X-coordinate to be less than "
+                + jacketButtonLocation.getX() + " but found X=" + actualLocation.getX()
+        );
 
     }
 

@@ -23,9 +23,9 @@ public class BaseTest {
     @AfterMethod
     public void tearDown() {
         if (driver != null) {
-            System.out.println("Test successful. Pausing for 5 seconds before closing...");
+            System.out.println("Test successful. Pausing for 3 seconds before closing...");
             try {
-                Thread.sleep(10000); // Pauses execution for 3000 milliseconds (3 seconds)
+                Thread.sleep(3000); // Pauses execution for 3000 milliseconds (3 seconds)
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
